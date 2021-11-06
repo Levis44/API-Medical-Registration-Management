@@ -27,6 +27,7 @@ AppModule = __decorate([
                 database: process.env.DB_USERNAME,
                 autoLoadEntities: true,
                 synchronize: true,
+                entities: ['dist/**/*.entity.js'],
             }),
         ],
         controllers: [app_controller_1.AppController],

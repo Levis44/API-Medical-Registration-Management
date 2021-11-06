@@ -17,6 +17,7 @@ require('dotenv/config');
       database: process.env.DB_USERNAME,
       autoLoadEntities: true,
       synchronize: true,
+      entities: ['dist/**/*.entity.js'],
     }),
   ],
   controllers: [AppController],
