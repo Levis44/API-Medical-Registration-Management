@@ -1,6 +1,8 @@
-import { Repository } from 'typeorm';
 import { CreateSpecialtyDto } from './dtos/create-specialty.dto';
 import { Specialty } from './specialty.entity';
-export declare class SpecialtyRepository extends Repository<Specialty> {
+import { SpecialtyRepository } from './specialty.repository';
+export declare class SpecialtyService {
+    private specialtyRepository;
+    constructor(specialtyRepository: SpecialtyRepository);
     createSpecialty(createSpecialtyDto: CreateSpecialtyDto): Promise<Specialty>;
 }

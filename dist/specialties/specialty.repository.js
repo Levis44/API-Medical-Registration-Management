@@ -10,6 +10,14 @@ exports.SpecialtyRepository = void 0;
 const typeorm_1 = require("typeorm");
 const specialty_entity_1 = require("./specialty.entity");
 let SpecialtyRepository = class SpecialtyRepository extends typeorm_1.Repository {
+    async createSpecialty(createSpecialtyDto) {
+        const { name } = createSpecialtyDto;
+        const specialty = this.create({
+            name,
+        });
+        await this.save(specialty);
+        return specialty;
+    }
 };
 SpecialtyRepository = __decorate([
     (0, typeorm_1.EntityRepository)(specialty_entity_1.Specialty)

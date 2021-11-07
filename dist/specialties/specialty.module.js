@@ -9,14 +9,16 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.SpecialtyModule = void 0;
 const common_1 = require("@nestjs/common");
 const typeorm_1 = require("@nestjs/typeorm");
+const specialty_controller_1 = require("./specialty.controller");
 const specialty_repository_1 = require("./specialty.repository");
+const specialty_service_1 = require("./specialty.service");
 let SpecialtyModule = class SpecialtyModule {
 };
 SpecialtyModule = __decorate([
     (0, common_1.Module)({
         imports: [typeorm_1.TypeOrmModule.forFeature([specialty_repository_1.SpecialtyRepository])],
-        controllers: [],
-        providers: [],
+        controllers: [specialty_controller_1.SpecialtyController],
+        providers: [specialty_service_1.SpecialtyService],
     })
 ], SpecialtyModule);
 exports.SpecialtyModule = SpecialtyModule;
