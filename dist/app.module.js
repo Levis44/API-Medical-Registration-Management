@@ -10,6 +10,7 @@ exports.AppModule = void 0;
 const common_1 = require("@nestjs/common");
 const typeorm_1 = require("@nestjs/typeorm");
 const specialty_module_1 = require("./specialties/specialty.module");
+const user_module_1 = require("./user/user.module");
 require('dotenv/config');
 let AppModule = class AppModule {
 };
@@ -29,6 +30,7 @@ AppModule = __decorate([
                 entities: ['dist/**/*.entity.js'],
             }),
             specialty_module_1.SpecialtyModule,
+            user_module_1.UserModule,
         ],
     })
 ], AppModule);

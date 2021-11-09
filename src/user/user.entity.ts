@@ -2,7 +2,7 @@ import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
 import { UserStatus } from './enum/userRole.enum';
 
 @Entity()
-export class Specialty {
+export class User {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
