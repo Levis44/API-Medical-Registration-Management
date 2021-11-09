@@ -23,6 +23,9 @@ let SpecialtyController = class SpecialtyController {
     createTask(createSpecialtyDto) {
         return this.specialtyService.createSpecialty(createSpecialtyDto);
     }
+    listSpecialties() {
+        return this.specialtyService.listSpecialties();
+    }
 };
 __decorate([
     (0, common_1.Post)('create'),
@@ -31,6 +34,12 @@ __decorate([
     __metadata("design:paramtypes", [create_specialty_dto_1.CreateSpecialtyDto]),
     __metadata("design:returntype", Promise)
 ], SpecialtyController.prototype, "createTask", null);
+__decorate([
+    (0, common_1.Get)('listAll'),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", []),
+    __metadata("design:returntype", Promise)
+], SpecialtyController.prototype, "listSpecialties", null);
 SpecialtyController = __decorate([
     (0, common_1.Controller)('specialty'),
     __metadata("design:paramtypes", [specialty_service_1.SpecialtyService])

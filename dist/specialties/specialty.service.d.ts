@@ -5,4 +5,5 @@ export declare class SpecialtyService {
     private specialtyRepository;
     constructor(specialtyRepository: SpecialtyRepository);
     createSpecialty(createSpecialtyDto: CreateSpecialtyDto): Promise<Specialty>;
+    listSpecialties(): Promise<Specialty[]>;
 }

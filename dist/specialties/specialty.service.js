@@ -23,6 +23,9 @@ let SpecialtyService = class SpecialtyService {
     createSpecialty(createSpecialtyDto) {
         return this.specialtyRepository.createSpecialty(createSpecialtyDto);
     }
+    listSpecialties() {
+        return this.specialtyRepository.find({ select: ['name'] });
+    }
 };
 SpecialtyService = __decorate([
     (0, common_1.Injectable)(),

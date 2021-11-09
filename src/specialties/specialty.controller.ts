@@ -1,4 +1,5 @@
-import { Body, Controller, Post } from '@nestjs/common';
+import { Body, Controller, Get, Post } from '@nestjs/common';
+
 import { CreateSpecialtyDto } from './dtos/create-specialty.dto';
 import { Specialty } from './specialty.entity';
 import { SpecialtyService } from './specialty.service';
@@ -12,5 +13,10 @@ export class SpecialtyController {
     @Body() createSpecialtyDto: CreateSpecialtyDto,
   ): Promise<Specialty> {
     return this.specialtyService.createSpecialty(createSpecialtyDto);
+  }
+
+  @Get('listAll')
+  listSpecialties(): Promise<Specialty[]> {
+    return this.specialtyService.listSpecialties();
   }
 }

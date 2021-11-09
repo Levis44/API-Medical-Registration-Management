@@ -14,4 +14,8 @@ export class SpecialtyService {
   createSpecialty(createSpecialtyDto: CreateSpecialtyDto): Promise<Specialty> {
     return this.specialtyRepository.createSpecialty(createSpecialtyDto);
   }
+
+  listSpecialties(): Promise<Specialty[]> {
+    return this.specialtyRepository.find({ select: ['name'] });
+  }
 }
