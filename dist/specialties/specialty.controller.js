@@ -20,7 +20,7 @@ let SpecialtyController = class SpecialtyController {
     constructor(specialtyService) {
         this.specialtyService = specialtyService;
     }
-    createTask(createSpecialtyDto) {
+    createSpecialty(createSpecialtyDto) {
         return this.specialtyService.createSpecialty(createSpecialtyDto);
     }
     listSpecialties() {
@@ -33,7 +33,7 @@ __decorate([
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [create_specialty_dto_1.CreateSpecialtyDto]),
     __metadata("design:returntype", Promise)
-], SpecialtyController.prototype, "createTask", null);
+], SpecialtyController.prototype, "createSpecialty", null);
 __decorate([
     (0, common_1.Get)('listAll'),
     __metadata("design:type", Function),

@@ -4,6 +4,6 @@ import { SpecialtyService } from './specialty.service';
 export declare class SpecialtyController {
     private specialtyService;
     constructor(specialtyService: SpecialtyService);
-    createTask(createSpecialtyDto: CreateSpecialtyDto): Promise<Specialty>;
+    createSpecialty(createSpecialtyDto: CreateSpecialtyDto): Promise<Specialty>;
     listSpecialties(): Promise<Specialty[]>;
 }

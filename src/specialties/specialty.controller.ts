@@ -9,7 +9,7 @@ export class SpecialtyController {
   constructor(private specialtyService: SpecialtyService) {}
 
   @Post('create')
-  createTask(
+  createSpecialty(
     @Body() createSpecialtyDto: CreateSpecialtyDto,
   ): Promise<Specialty> {
     return this.specialtyService.createSpecialty(createSpecialtyDto);
