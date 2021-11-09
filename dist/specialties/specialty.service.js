@@ -26,6 +26,14 @@ let SpecialtyService = class SpecialtyService {
     listSpecialties() {
         return this.specialtyRepository.find({ select: ['name'] });
     }
+    async deleteSpecialtyById(id) {
+        const specialty = await this.specialtyRepository.findOne(id);
+        if (!specialty) {
+            throw new common_1.NotFoundException(`Impossible to delete the Specialty with ID: ${id} because it was not found`);
+        }
+        await this.specialtyRepository.remove(specialty);
+        return this.listSpecialties();
+    }
 };
 SpecialtyService = __decorate([
     (0, common_1.Injectable)(),

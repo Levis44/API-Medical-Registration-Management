@@ -6,4 +6,5 @@ export declare class SpecialtyService {
     constructor(specialtyRepository: SpecialtyRepository);
     createSpecialty(createSpecialtyDto: CreateSpecialtyDto): Promise<Specialty>;
     listSpecialties(): Promise<Specialty[]>;
+    deleteSpecialtyById(id: string): Promise<Specialty[]>;
 }

@@ -26,6 +26,9 @@ let SpecialtyController = class SpecialtyController {
     listSpecialties() {
         return this.specialtyService.listSpecialties();
     }
+    deleteSpecialtyById(id) {
+        return this.specialtyService.deleteSpecialtyById(id);
+    }
 };
 __decorate([
     (0, common_1.Post)('create'),
@@ -40,6 +43,13 @@ __decorate([
     __metadata("design:paramtypes", []),
     __metadata("design:returntype", Promise)
 ], SpecialtyController.prototype, "listSpecialties", null);
+__decorate([
+    (0, common_1.Delete)('delete/:id'),
+    __param(0, (0, common_1.Param)('id')),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [String]),
+    __metadata("design:returntype", Promise)
+], SpecialtyController.prototype, "deleteSpecialtyById", null);
 SpecialtyController = __decorate([
     (0, common_1.Controller)('specialty'),
     __metadata("design:paramtypes", [specialty_service_1.SpecialtyService])

@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { CreateSpecialtyDto } from './dtos/create-specialty.dto';
 import { Specialty } from './specialty.entity';
@@ -17,5 +17,19 @@ export class SpecialtyService {
 
   listSpecialties(): Promise<Specialty[]> {
     return this.specialtyRepository.find({ select: ['name'] });
+  }
+
+  async deleteSpecialtyById(id: string): Promise<Specialty[]> {
+    const specialty = await this.specialtyRepository.findOne(id);
+
+    if (!specialty) {
+      throw new NotFoundException(
+        `Impossible to delete the Specialty with ID: ${id} because it was not found`,
+      );
+    }
+
+    await this.specialtyRepository.remove(specialty);
+
+    return this.listSpecialties();
   }
 }
