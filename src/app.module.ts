@@ -1,5 +1,6 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { DoctorsModule } from './doctors/doctors.module';
 
 import { SpecialtiesModule } from './specialties/specialties.module';
 
@@ -20,6 +21,7 @@ require('dotenv/config');
       entities: ['dist/**/*.entity.js'],
     }),
     SpecialtiesModule,
+    DoctorsModule,
   ],
 })
 export class AppModule {}

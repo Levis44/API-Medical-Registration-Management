@@ -1,6 +1,6 @@
 import { Repository } from 'typeorm';
-import { Doctor } from './doctor.entity';
 import { CreateDoctorDto } from './dtos/create-doctor.dto';
+import { Doctor } from './doctor.entity';
 export declare class DoctorRepository extends Repository<Doctor> {
-    createSpecialty(createSoctorDto: CreateDoctorDto): Promise<Doctor>;
+    createDoctor(createSoctorDto: CreateDoctorDto): Promise<Doctor>;
 }

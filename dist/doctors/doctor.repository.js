@@ -10,7 +10,7 @@ exports.DoctorRepository = void 0;
 const typeorm_1 = require("typeorm");
 const doctor_entity_1 = require("./doctor.entity");
 let DoctorRepository = class DoctorRepository extends typeorm_1.Repository {
-    async createSpecialty(createSoctorDto) {
+    async createDoctor(createSoctorDto) {
         const { name, crm, medicalSpecialty } = createSoctorDto;
         return await this.save({
             name,
