@@ -15,6 +15,7 @@ class CreateSpecialtyDto {
 }
 __decorate([
     (0, class_validator_1.IsNotEmpty)(),
+    (0, class_validator_1.IsString)(),
     __metadata("design:type", String)
 ], CreateSpecialtyDto.prototype, "name", void 0);
 exports.CreateSpecialtyDto = CreateSpecialtyDto;

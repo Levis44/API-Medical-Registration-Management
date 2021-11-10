@@ -9,14 +9,29 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.UpdateSpecialtyDto = void 0;
+exports.CreateDoctorDto = void 0;
+const class_transformer_1 = require("class-transformer");
 const class_validator_1 = require("class-validator");
-class UpdateSpecialtyDto {
+const specialty_entity_1 = require("../../specialties/specialty.entity");
+class CreateDoctorDto {
 }
 __decorate([
     (0, class_validator_1.IsNotEmpty)(),
     (0, class_validator_1.IsString)(),
+    (0, class_validator_1.MaxLength)(120),
     __metadata("design:type", String)
-], UpdateSpecialtyDto.prototype, "name", void 0);
-exports.UpdateSpecialtyDto = UpdateSpecialtyDto;
-//# sourceMappingURL=update-specialty.dto.js.map
+], CreateDoctorDto.prototype, "name", void 0);
+__decorate([
+    (0, class_validator_1.IsInt)(),
+    (0, class_validator_1.MaxLength)(7),
+    __metadata("design:type", Number)
+], CreateDoctorDto.prototype, "crm", void 0);
+__decorate([
+    (0, class_validator_1.IsArray)(),
+    (0, class_validator_1.ValidateNested)({ each: true }),
+    (0, class_validator_1.ArrayMinSize)(2),
+    (0, class_transformer_1.Type)(() => specialty_entity_1.Specialty),
+    __metadata("design:type", Array)
+], CreateDoctorDto.prototype, "medicalSpecialty", void 0);
+exports.CreateDoctorDto = CreateDoctorDto;
+//# sourceMappingURL=create-doctor.dto.js.map

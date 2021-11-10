@@ -9,14 +9,35 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.UpdateSpecialtyDto = void 0;
+exports.Doctor = void 0;
 const class_validator_1 = require("class-validator");
-class UpdateSpecialtyDto {
-}
+const specialty_entity_1 = require("../specialties/specialty.entity");
+const typeorm_1 = require("typeorm");
+let Doctor = class Doctor {
+};
 __decorate([
-    (0, class_validator_1.IsNotEmpty)(),
-    (0, class_validator_1.IsString)(),
+    (0, typeorm_1.PrimaryGeneratedColumn)('uuid'),
     __metadata("design:type", String)
-], UpdateSpecialtyDto.prototype, "name", void 0);
-exports.UpdateSpecialtyDto = UpdateSpecialtyDto;
-//# sourceMappingURL=update-specialty.dto.js.map
+], Doctor.prototype, "id", void 0);
+__decorate([
+    (0, typeorm_1.Column)(),
+    (0, class_validator_1.IsString)(),
+    (0, class_validator_1.MaxLength)(120),
+    __metadata("design:type", String)
+], Doctor.prototype, "name", void 0);
+__decorate([
+    (0, typeorm_1.Column)(),
+    (0, class_validator_1.IsInt)(),
+    (0, class_validator_1.MaxLength)(7),
+    __metadata("design:type", Number)
+], Doctor.prototype, "crm", void 0);
+__decorate([
+    (0, typeorm_1.ManyToMany)(() => specialty_entity_1.Specialty),
+    (0, typeorm_1.JoinTable)(),
+    __metadata("design:type", Array)
+], Doctor.prototype, "medicalSpecialty", void 0);
+Doctor = __decorate([
+    (0, typeorm_1.Entity)()
+], Doctor);
+exports.Doctor = Doctor;
+//# sourceMappingURL=doctor.entity.js.map

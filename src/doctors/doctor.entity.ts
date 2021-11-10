@@ -1,4 +1,5 @@
 import { IsInt, IsString, MaxLength } from 'class-validator';
+import { Specialty } from 'src/specialties/specialty.entity';
 import {
   Column,
   Entity,
@@ -8,7 +9,7 @@ import {
 } from 'typeorm';
 
 @Entity()
-export class Specialty {
+export class Doctor {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 

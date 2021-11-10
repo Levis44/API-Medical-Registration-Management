@@ -9,7 +9,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.AppModule = void 0;
 const common_1 = require("@nestjs/common");
 const typeorm_1 = require("@nestjs/typeorm");
-const specialty_module_1 = require("./specialties/specialty.module");
+const specialties_module_1 = require("./specialties/specialties.module");
 require('dotenv/config');
 let AppModule = class AppModule {
 };
@@ -28,7 +28,7 @@ AppModule = __decorate([
                 synchronize: true,
                 entities: ['dist/**/*.entity.js'],
             }),
-            specialty_module_1.SpecialtyModule,
+            specialties_module_1.SpecialtiesModule,
         ],
     })
 ], AppModule);

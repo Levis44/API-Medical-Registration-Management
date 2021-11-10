@@ -5,18 +5,22 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.UpdateSpecialtyDto = void 0;
-const class_validator_1 = require("class-validator");
-class UpdateSpecialtyDto {
-}
-__decorate([
-    (0, class_validator_1.IsNotEmpty)(),
-    (0, class_validator_1.IsString)(),
-    __metadata("design:type", String)
-], UpdateSpecialtyDto.prototype, "name", void 0);
-exports.UpdateSpecialtyDto = UpdateSpecialtyDto;
-//# sourceMappingURL=update-specialty.dto.js.map
+exports.DoctorRepository = void 0;
+const typeorm_1 = require("typeorm");
+const doctor_entity_1 = require("./doctor.entity");
+let DoctorRepository = class DoctorRepository extends typeorm_1.Repository {
+    async createSpecialty(createSoctorDto) {
+        const { name, crm, medicalSpecialty } = createSoctorDto;
+        return await this.save({
+            name,
+            crm,
+            medicalSpecialty,
+        });
+    }
+};
+DoctorRepository = __decorate([
+    (0, typeorm_1.EntityRepository)(doctor_entity_1.Doctor)
+], DoctorRepository);
+exports.DoctorRepository = DoctorRepository;
+//# sourceMappingURL=doctor.repository.js.map

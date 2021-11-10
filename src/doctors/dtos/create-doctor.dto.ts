@@ -10,7 +10,7 @@ import {
 } from 'class-validator';
 import { Specialty } from 'src/specialties/specialty.entity';
 
-export class CreateSpecialtyDto {
+export class CreateDoctorDto {
   @IsNotEmpty()
   @IsString()
   @MaxLength(120)
