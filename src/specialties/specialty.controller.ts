@@ -1,6 +1,7 @@
 import { Body, Controller, Delete, Get, Param, Post } from '@nestjs/common';
 
 import { CreateSpecialtyDto } from './dtos/create-specialty.dto';
+
 import { Specialty } from './specialty.entity';
 import { SpecialtyService } from './specialty.service';
 

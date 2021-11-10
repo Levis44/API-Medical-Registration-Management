@@ -1,5 +1,7 @@
 import { EntityRepository, Repository } from 'typeorm';
+
 import { CreateSpecialtyDto } from './dtos/create-specialty.dto';
+
 import { Specialty } from './specialty.entity';
 
 @EntityRepository(Specialty)

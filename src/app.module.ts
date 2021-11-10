@@ -1,5 +1,6 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
+
 import { SpecialtyModule } from './specialties/specialty.module';
 
 require('dotenv/config');
