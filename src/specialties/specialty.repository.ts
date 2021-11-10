@@ -9,12 +9,8 @@ export class SpecialtyRepository extends Repository<Specialty> {
   ): Promise<Specialty> {
     const { name } = createSpecialtyDto;
 
-    const specialty = this.create({
+    return await this.save({
       name,
     });
-
-    await this.save(specialty);
-
-    return specialty;
   }
 }

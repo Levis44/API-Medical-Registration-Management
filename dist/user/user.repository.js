@@ -6,19 +6,19 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.SpecialtyRepository = void 0;
+exports.UserRepository = void 0;
 const typeorm_1 = require("typeorm");
-const specialty_entity_1 = require("./specialty.entity");
-let SpecialtyRepository = class SpecialtyRepository extends typeorm_1.Repository {
-    async createSpecialty(createSpecialtyDto) {
-        const { name } = createSpecialtyDto;
+const user_entity_1 = require("./user.entity");
+let UserRepository = class UserRepository extends typeorm_1.Repository {
+    async createUser(createUserDto) {
+        const { name } = createUserDto;
         return await this.save({
             name,
         });
     }
 };
-SpecialtyRepository = __decorate([
-    (0, typeorm_1.EntityRepository)(specialty_entity_1.Specialty)
-], SpecialtyRepository);
-exports.SpecialtyRepository = SpecialtyRepository;
-//# sourceMappingURL=specialty.repository.js.map
+UserRepository = __decorate([
+    (0, typeorm_1.EntityRepository)(user_entity_1.User)
+], UserRepository);
+exports.UserRepository = UserRepository;
+//# sourceMappingURL=user.repository.js.map
