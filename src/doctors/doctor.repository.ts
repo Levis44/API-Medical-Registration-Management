@@ -1,10 +1,12 @@
 import { EntityRepository, Repository } from 'typeorm';
-import { Doctor } from './doctor.entity';
+
 import { CreateDoctorDto } from './dtos/create-doctor.dto';
+
+import { Doctor } from './doctor.entity';
 
 @EntityRepository(Doctor)
 export class DoctorRepository extends Repository<Doctor> {
-  async createSpecialty(createSoctorDto: CreateDoctorDto): Promise<Doctor> {
+  async createDoctor(createSoctorDto: CreateDoctorDto): Promise<Doctor> {
     const { name, crm, medicalSpecialty } = createSoctorDto;
 
     return await this.save({
