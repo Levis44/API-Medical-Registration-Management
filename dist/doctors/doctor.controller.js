@@ -16,19 +16,23 @@ exports.DoctorController = void 0;
 const common_1 = require("@nestjs/common");
 const create_doctor_dto_1 = require("./dtos/create-doctor.dto");
 const doctor_service_1 = require("./doctor.service");
+const typeorm_1 = require("typeorm");
 let DoctorController = class DoctorController {
     constructor(doctorService) {
         this.doctorService = doctorService;
     }
-    createSpecialty(createDoctorDto) {
-        return this.doctorService.createDoctor(createDoctorDto);
+    createSpecialty(createDoctorDto, manager) {
+        return this.doctorService.createDoctor(manager, createDoctorDto);
     }
 };
 __decorate([
     (0, common_1.Post)('create'),
+    (0, typeorm_1.Transaction)(),
     __param(0, (0, common_1.Body)()),
+    __param(1, (0, typeorm_1.TransactionManager)()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [create_doctor_dto_1.CreateDoctorDto]),
+    __metadata("design:paramtypes", [create_doctor_dto_1.CreateDoctorDto,
+        typeorm_1.EntityManager]),
     __metadata("design:returntype", Promise)
 ], DoctorController.prototype, "createSpecialty", null);
 DoctorController = __decorate([

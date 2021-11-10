@@ -4,13 +4,18 @@ import { CreateDoctorDto } from './dtos/create-doctor.dto';
 
 import { Doctor } from './doctor.entity';
 import { DoctorService } from './doctor.service';
+import { EntityManager, Transaction, TransactionManager } from 'typeorm';
 
 @Controller('doctor')
 export class DoctorController {
   constructor(private doctorService: DoctorService) {}
 
   @Post('create')
-  createSpecialty(@Body() createDoctorDto: CreateDoctorDto): Promise<Doctor> {
-    return this.doctorService.createDoctor(createDoctorDto);
+  @Transaction()
+  createSpecialty(
+    @Body() createDoctorDto: CreateDoctorDto,
+    @TransactionManager() manager: EntityManager,
+  ): Promise<Doctor> {
+    return this.doctorService.createDoctor(manager, createDoctorDto);
   }
 }

@@ -9,13 +9,14 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.DoctorRepository = void 0;
 const typeorm_1 = require("typeorm");
 const doctor_entity_1 = require("./doctor.entity");
+const specialty_entity_1 = require("../specialties/specialty.entity");
 let DoctorRepository = class DoctorRepository extends typeorm_1.Repository {
-    async createDoctor(createSoctorDto) {
-        const { name, crm, medicalSpecialty } = createSoctorDto;
+    async createDoctor(createSoctorDto, specialties) {
+        const { name, crm } = createSoctorDto;
         return await this.save({
             name,
             crm,
-            medicalSpecialty,
+            specialties,
         });
     }
 };

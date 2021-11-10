@@ -16,12 +16,18 @@ exports.DoctorService = void 0;
 const common_1 = require("@nestjs/common");
 const typeorm_1 = require("@nestjs/typeorm");
 const doctor_repository_1 = require("./doctor.repository");
+const specialty_entity_1 = require("../specialties/specialty.entity");
 let DoctorService = class DoctorService {
     constructor(doctorRepository) {
         this.doctorRepository = doctorRepository;
     }
-    createDoctor(createDoctorDto) {
-        return this.doctorRepository.createDoctor(createDoctorDto);
+    async createDoctor(manager, createDoctorDto) {
+        const { medicalSpecialty } = createDoctorDto;
+        const medicalSpecialties = await manager.findByIds(specialty_entity_1.Specialty, medicalSpecialty);
+        if (medicalSpecialties.length < medicalSpecialty.length) {
+            throw new common_1.ConflictException('ERROR');
+        }
+        return this.doctorRepository.createDoctor(createDoctorDto, medicalSpecialties);
     }
 };
 DoctorService = __decorate([
