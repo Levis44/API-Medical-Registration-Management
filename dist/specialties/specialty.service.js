@@ -24,7 +24,7 @@ let SpecialtyService = class SpecialtyService {
         return this.specialtyRepository.createSpecialty(createSpecialtyDto);
     }
     listSpecialties() {
-        return this.specialtyRepository.find({ select: ['name'] });
+        return this.specialtyRepository.find();
     }
     async deleteSpecialtyById(id) {
         const specialty = await this.specialtyRepository.findOne(id);
@@ -33,6 +33,11 @@ let SpecialtyService = class SpecialtyService {
         }
         await this.specialtyRepository.remove(specialty);
         return this.listSpecialties();
+    }
+    async updateSpecialty(id, name) {
+        const specialty = await this.specialtyRepository.findOneOrFail(id);
+        Object.assign(specialty, { name });
+        return await this.specialtyRepository.save(specialty);
     }
 };
 SpecialtyService = __decorate([

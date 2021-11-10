@@ -7,4 +7,5 @@ export declare class SpecialtyService {
     createSpecialty(createSpecialtyDto: CreateSpecialtyDto): Promise<Specialty>;
     listSpecialties(): Promise<Specialty[]>;
     deleteSpecialtyById(id: string): Promise<Specialty[]>;
+    updateSpecialty(id: string, name: string): Promise<Specialty>;
 }

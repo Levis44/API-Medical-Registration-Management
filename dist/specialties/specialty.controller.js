@@ -15,6 +15,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.SpecialtyController = void 0;
 const common_1 = require("@nestjs/common");
 const create_specialty_dto_1 = require("./dtos/create-specialty.dto");
+const update_specialty_dto_1 = require("./dtos/update-specialty.dto");
 const specialty_service_1 = require("./specialty.service");
 let SpecialtyController = class SpecialtyController {
     constructor(specialtyService) {
@@ -28,6 +29,10 @@ let SpecialtyController = class SpecialtyController {
     }
     deleteSpecialtyById(id) {
         return this.specialtyService.deleteSpecialtyById(id);
+    }
+    updateSpecialty(id, updateSpecialtyDto) {
+        const { name } = updateSpecialtyDto;
+        return this.specialtyService.updateSpecialty(id, name);
     }
 };
 __decorate([
@@ -50,6 +55,14 @@ __decorate([
     __metadata("design:paramtypes", [String]),
     __metadata("design:returntype", Promise)
 ], SpecialtyController.prototype, "deleteSpecialtyById", null);
+__decorate([
+    (0, common_1.Patch)('update/:id'),
+    __param(0, (0, common_1.Param)('id')),
+    __param(1, (0, common_1.Body)()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [String, update_specialty_dto_1.UpdateSpecialtyDto]),
+    __metadata("design:returntype", Promise)
+], SpecialtyController.prototype, "updateSpecialty", null);
 SpecialtyController = __decorate([
     (0, common_1.Controller)('specialty'),
     __metadata("design:paramtypes", [specialty_service_1.SpecialtyService])

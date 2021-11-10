@@ -18,7 +18,7 @@ export class SpecialtyService {
   }
 
   listSpecialties(): Promise<Specialty[]> {
-    return this.specialtyRepository.find({ select: ['name'] });
+    return this.specialtyRepository.find();
   }
 
   async deleteSpecialtyById(id: string): Promise<Specialty[]> {
@@ -33,5 +33,13 @@ export class SpecialtyService {
     await this.specialtyRepository.remove(specialty);
 
     return this.listSpecialties();
+  }
+
+  async updateSpecialty(id: string, name: string): Promise<Specialty> {
+    const specialty = await this.specialtyRepository.findOneOrFail(id);
+
+    Object.assign(specialty, { name });
+
+    return await this.specialtyRepository.save(specialty);
   }
 }
