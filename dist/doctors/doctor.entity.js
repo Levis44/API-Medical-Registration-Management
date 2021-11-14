@@ -27,10 +27,18 @@ __decorate([
 ], Doctor.prototype, "name", void 0);
 __decorate([
     (0, typeorm_1.Column)(),
-    (0, class_validator_1.IsInt)(),
+    (0, class_validator_1.IsNumber)(),
     (0, class_validator_1.MaxLength)(7),
     __metadata("design:type", Number)
 ], Doctor.prototype, "crm", void 0);
+__decorate([
+    (0, typeorm_1.Column)({ length: 30 }),
+    __metadata("design:type", String)
+], Doctor.prototype, "cellphoneNumber", void 0);
+__decorate([
+    (0, typeorm_1.Column)({ length: 30 }),
+    __metadata("design:type", String)
+], Doctor.prototype, "phoneNumber", void 0);
 __decorate([
     (0, typeorm_1.ManyToMany)(() => specialty_entity_1.Specialty),
     (0, typeorm_1.JoinTable)(),

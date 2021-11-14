@@ -21,10 +21,17 @@ __decorate([
     __metadata("design:type", String)
 ], CreateDoctorDto.prototype, "name", void 0);
 __decorate([
-    (0, class_validator_1.IsInt)(),
-    (0, class_validator_1.Max)(9999999),
+    (0, class_validator_1.IsNumber)(),
     __metadata("design:type", Number)
 ], CreateDoctorDto.prototype, "crm", void 0);
+__decorate([
+    (0, class_validator_1.IsNumberString)(),
+    __metadata("design:type", String)
+], CreateDoctorDto.prototype, "cellphoneNumber", void 0);
+__decorate([
+    (0, class_validator_1.IsNumberString)(),
+    __metadata("design:type", String)
+], CreateDoctorDto.prototype, "phoneNumber", void 0);
 __decorate([
     (0, class_validator_1.IsArray)(),
     (0, class_validator_1.ArrayMinSize)(2),

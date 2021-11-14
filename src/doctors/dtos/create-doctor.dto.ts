@@ -1,10 +1,10 @@
 import {
   ArrayMinSize,
   IsArray,
-  IsInt,
   IsNotEmpty,
+  IsNumber,
+  IsNumberString,
   IsString,
-  Max,
   MaxLength,
 } from 'class-validator';
 import { Specialty } from 'src/specialties/specialty.entity';
@@ -15,9 +15,14 @@ export class CreateDoctorDto {
   @MaxLength(120)
   name: string;
 
-  @IsInt()
-  @Max(9999999)
+  @IsNumber()
   crm: number;
+
+  @IsNumberString()
+  cellphoneNumber: string;
+
+  @IsNumberString()
+  phoneNumber: string;
 
   //cep: number;
 

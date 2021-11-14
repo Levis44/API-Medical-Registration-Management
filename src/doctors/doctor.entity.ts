@@ -1,4 +1,4 @@
-import { IsInt, IsString, MaxLength } from 'class-validator';
+import { IsInt, IsNumber, IsString, MaxLength } from 'class-validator';
 import { Specialty } from 'src/specialties/specialty.entity';
 import {
   Column,
@@ -19,9 +19,15 @@ export class Doctor {
   name: string;
 
   @Column()
-  @IsInt()
+  @IsNumber()
   @MaxLength(7)
   crm: number;
+
+  @Column({ length: 30 })
+  cellphoneNumber: string;
+
+  @Column({ length: 30 })
+  phoneNumber: string;
 
   //cep: number;
 
