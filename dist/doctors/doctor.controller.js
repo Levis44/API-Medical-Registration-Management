@@ -24,6 +24,9 @@ let DoctorController = class DoctorController {
     createSpecialty(createDoctorDto, manager) {
         return this.doctorService.createDoctor(manager, createDoctorDto);
     }
+    listDoctors() {
+        return this.doctorService.listDoctors();
+    }
 };
 __decorate([
     (0, common_1.Post)('create'),
@@ -35,6 +38,13 @@ __decorate([
         typeorm_1.EntityManager]),
     __metadata("design:returntype", Promise)
 ], DoctorController.prototype, "createSpecialty", null);
+__decorate([
+    (0, common_1.Get)('listAll'),
+    (0, typeorm_1.Transaction)(),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", []),
+    __metadata("design:returntype", Promise)
+], DoctorController.prototype, "listDoctors", null);
 DoctorController = __decorate([
     (0, common_1.Controller)('doctor'),
     __metadata("design:paramtypes", [doctor_service_1.DoctorService])

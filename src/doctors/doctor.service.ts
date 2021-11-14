@@ -35,4 +35,10 @@ export class DoctorService {
       medicalSpecialties,
     );
   }
+
+  async listDoctors() {
+    return await this.doctorRepository.find({
+      relations: ['medicalSpecialty'],
+    });
+  }
 }

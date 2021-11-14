@@ -6,4 +6,5 @@ export declare class DoctorController {
     private doctorService;
     constructor(doctorService: DoctorService);
     createSpecialty(createDoctorDto: CreateDoctorDto, manager: EntityManager): Promise<Doctor>;
+    listDoctors(): Promise<Doctor[]>;
 }

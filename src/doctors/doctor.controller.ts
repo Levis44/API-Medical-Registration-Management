@@ -1,4 +1,4 @@
-import { Body, Controller, Post } from '@nestjs/common';
+import { Body, Controller, Get, Post } from '@nestjs/common';
 
 import { CreateDoctorDto } from './dtos/create-doctor.dto';
 
@@ -17,5 +17,11 @@ export class DoctorController {
     @TransactionManager() manager: EntityManager,
   ): Promise<Doctor> {
     return this.doctorService.createDoctor(manager, createDoctorDto);
+  }
+
+  @Get('listAll')
+  @Transaction()
+  listDoctors(): Promise<Doctor[]> {
+    return this.doctorService.listDoctors();
   }
 }

@@ -6,4 +6,5 @@ export declare class DoctorService {
     private doctorRepository;
     constructor(doctorRepository: DoctorRepository);
     createDoctor(manager: EntityManager, createDoctorDto: CreateDoctorDto): Promise<Doctor>;
+    listDoctors(): Promise<Doctor[]>;
 }

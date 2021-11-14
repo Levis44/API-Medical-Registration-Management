@@ -29,6 +29,11 @@ let DoctorService = class DoctorService {
         }
         return this.doctorRepository.createDoctor(createDoctorDto, medicalSpecialties);
     }
+    async listDoctors() {
+        return await this.doctorRepository.find({
+            relations: ['medicalSpecialty'],
+        });
+    }
 };
 DoctorService = __decorate([
     (0, common_1.Injectable)(),
