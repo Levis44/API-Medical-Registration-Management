@@ -10,14 +10,16 @@ exports.DoctorRepository = void 0;
 const typeorm_1 = require("typeorm");
 const doctor_entity_1 = require("./doctor.entity");
 const specialty_entity_1 = require("../specialties/specialty.entity");
+const common_1 = require("@nestjs/common");
 let DoctorRepository = class DoctorRepository extends typeorm_1.Repository {
     async createDoctor(createSoctorDto, specialties) {
         const { name, crm } = createSoctorDto;
-        return await this.save({
-            name,
-            crm,
-            specialties,
-        });
+        const userAlreadyExists = this.findOne({ name });
+        if (userAlreadyExists) {
+            throw new common_1.ConflictException('Doctor already exists');
+        }
+        const user = this.create({ name, crm, medicalSpecialty: specialties });
+        return await this.save(user);
     }
 };
 DoctorRepository = __decorate([

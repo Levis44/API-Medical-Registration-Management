@@ -4,6 +4,7 @@ import { CreateDoctorDto } from './dtos/create-doctor.dto';
 
 import { Doctor } from './doctor.entity';
 import { Specialty } from 'src/specialties/specialty.entity';
+import { ConflictException } from '@nestjs/common';
 
 @EntityRepository(Doctor)
 export class DoctorRepository extends Repository<Doctor> {
@@ -13,10 +14,14 @@ export class DoctorRepository extends Repository<Doctor> {
   ): Promise<Doctor> {
     const { name, crm } = createSoctorDto;
 
-    return await this.save({
-      name,
-      crm,
-      specialties,
-    });
+    const userAlreadyExists = this.findOne({ name });
+
+    if (userAlreadyExists) {
+      throw new ConflictException('Doctor already exists');
+    }
+
+    const user = this.create({ name, crm, medicalSpecialty: specialties });
+
+    return await this.save(user);
   }
 }
