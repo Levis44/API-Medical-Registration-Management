@@ -24,7 +24,8 @@ export class CreateDoctorDto {
   @IsNumberString()
   phoneNumber: string;
 
-  //cep: number;
+  @IsNumber()
+  cep: number;
 
   @IsArray()
   @ArrayMinSize(2)

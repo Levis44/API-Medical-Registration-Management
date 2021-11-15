@@ -9,25 +9,26 @@ import { ConflictException } from '@nestjs/common';
 @EntityRepository(Doctor)
 export class DoctorRepository extends Repository<Doctor> {
   async createDoctor(
-    createSoctorDto: CreateDoctorDto,
+    createDoctorDto: CreateDoctorDto,
     specialties: Specialty[],
   ): Promise<Doctor> {
-    const { name, crm, phoneNumber, cellphoneNumber } = createSoctorDto;
+    const { name, crm, phoneNumber, cellphoneNumber, cep } = createDoctorDto;
 
-    const userAlreadyExists = await this.findOne({ name });
+    const doctorAlreadyExists = await this.findOne({ name });
 
-    if (userAlreadyExists) {
+    if (doctorAlreadyExists) {
       throw new ConflictException('Doctor already exists');
     }
 
-    const user = this.create({
+    const doctor = this.create({
       name,
       crm,
       phoneNumber,
       cellphoneNumber,
+      cep,
       medicalSpecialty: specialties,
     });
 
-    return await this.save(user);
+    return await this.save(doctor);
   }
 }

@@ -1,4 +1,4 @@
-import { IsInt, IsNumber, IsString, MaxLength } from 'class-validator';
+import { IsNumber, IsString, MaxLength } from 'class-validator';
 import { Specialty } from 'src/specialties/specialty.entity';
 import {
   Column,
@@ -29,7 +29,9 @@ export class Doctor {
   @Column({ length: 30 })
   phoneNumber: string;
 
-  //cep: number;
+  @Column()
+  @IsNumber()
+  cep: number;
 
   @ManyToMany(() => Specialty)
   @JoinTable()

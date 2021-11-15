@@ -4,5 +4,6 @@ export declare class CreateDoctorDto {
     crm: number;
     cellphoneNumber: string;
     phoneNumber: string;
+    cep: number;
     medicalSpecialty: Specialty[];
 }

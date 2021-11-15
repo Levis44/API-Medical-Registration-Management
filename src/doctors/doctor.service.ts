@@ -27,7 +27,7 @@ export class DoctorService {
     );
 
     if (medicalSpecialties.length < medicalSpecialty.length) {
-      throw new ConflictException('ERROR');
+      throw new ConflictException('Specialty does not exists');
     }
 
     return this.doctorRepository.createDoctor(

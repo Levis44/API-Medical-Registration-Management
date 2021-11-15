@@ -40,6 +40,11 @@ __decorate([
     __metadata("design:type", String)
 ], Doctor.prototype, "phoneNumber", void 0);
 __decorate([
+    (0, typeorm_1.Column)(),
+    (0, class_validator_1.IsNumber)(),
+    __metadata("design:type", Number)
+], Doctor.prototype, "cep", void 0);
+__decorate([
     (0, typeorm_1.ManyToMany)(() => specialty_entity_1.Specialty),
     (0, typeorm_1.JoinTable)(),
     __metadata("design:type", Array)

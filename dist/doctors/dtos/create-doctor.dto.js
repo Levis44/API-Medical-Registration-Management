@@ -33,6 +33,10 @@ __decorate([
     __metadata("design:type", String)
 ], CreateDoctorDto.prototype, "phoneNumber", void 0);
 __decorate([
+    (0, class_validator_1.IsNumber)(),
+    __metadata("design:type", Number)
+], CreateDoctorDto.prototype, "cep", void 0);
+__decorate([
     (0, class_validator_1.IsArray)(),
     (0, class_validator_1.ArrayMinSize)(2),
     __metadata("design:type", Array)

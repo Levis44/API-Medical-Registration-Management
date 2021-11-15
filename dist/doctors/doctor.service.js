@@ -25,7 +25,7 @@ let DoctorService = class DoctorService {
         const { medicalSpecialty } = createDoctorDto;
         const medicalSpecialties = await manager.findByIds(specialty_entity_1.Specialty, medicalSpecialty);
         if (medicalSpecialties.length < medicalSpecialty.length) {
-            throw new common_1.ConflictException('ERROR');
+            throw new common_1.ConflictException('Specialty does not exists');
         }
         return this.doctorRepository.createDoctor(createDoctorDto, medicalSpecialties);
     }
