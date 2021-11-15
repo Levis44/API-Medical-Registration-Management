@@ -3,12 +3,10 @@ import { Doctor } from './doctor.entity';
 import { DoctorService } from './doctor.service';
 import { EntityManager } from 'typeorm';
 import { UpdateInfoDoctorDto } from './dtos/update-doctor-info.dto';
-import { UpdateMedicalSpecialtyDto } from './dtos/update-medicalSpecialty.dto';
 export declare class DoctorController {
     private doctorService;
     constructor(doctorService: DoctorService);
     createSpecialty(createDoctorDto: CreateDoctorDto, manager: EntityManager): Promise<Doctor>;
     listDoctors(): Promise<Doctor[]>;
-    updateInfo(id: string, updateInfoDto: UpdateInfoDoctorDto): Promise<Doctor>;
-    updateMedicalSpecialty(id: string, updateMedicalSpecialtyDto: UpdateMedicalSpecialtyDto, manager: EntityManager): Promise<Doctor>;
+    updateInfo(id: string, updateInfoDto: UpdateInfoDoctorDto, manager: EntityManager): Promise<Doctor>;
 }

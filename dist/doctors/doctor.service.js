@@ -23,10 +23,7 @@ let DoctorService = class DoctorService {
     }
     async createDoctor(manager, createDoctorDto) {
         const { medicalSpecialty } = createDoctorDto;
-        const medicalSpecialties = await manager.findByIds(specialty_entity_1.Specialty, medicalSpecialty);
-        if (medicalSpecialties.length < medicalSpecialty.length) {
-            throw new common_1.ConflictException('Specialty does not exists');
-        }
+        const medicalSpecialties = await this.validateSpecialties(manager, medicalSpecialty);
         return this.doctorRepository.createDoctor(createDoctorDto, medicalSpecialties);
     }
     async listDoctors() {
@@ -34,21 +31,24 @@ let DoctorService = class DoctorService {
             relations: ['medicalSpecialty'],
         });
     }
-    async updateInfo(id, updateInfoDto) {
-        const doctor = await this.doctorRepository.findOneOrFail({ id });
+    async updateInfo(id, updateInfoDto, manager) {
+        const { medicalSpecialty } = updateInfoDto;
+        const doctor = await this.doctorRepository.findOne({ id });
+        if (!doctor) {
+            throw new common_1.ConflictException('Doctor does not exists');
+        }
+        if (medicalSpecialty) {
+            const medicalSpecialties = await this.validateSpecialties(manager, medicalSpecialty);
+            return this.doctorRepository.save(Object.assign(doctor, Object.assign(Object.assign({}, updateInfoDto), { medicalSpecialty: medicalSpecialties })));
+        }
         return this.doctorRepository.save(Object.assign(doctor, updateInfoDto));
     }
-    async updateMedicalSpecialty(id, updateMedicalSpecialtyDto, manager) {
-        const { medicalSpecialty } = updateMedicalSpecialtyDto;
+    async validateSpecialties(manager, medicalSpecialty) {
         const medicalSpecialties = await manager.findByIds(specialty_entity_1.Specialty, medicalSpecialty);
         if (medicalSpecialties.length < medicalSpecialty.length) {
             throw new common_1.ConflictException('Specialty does not exists');
         }
-        const doctor = await this.doctorRepository.findOneOrFail({ id });
-        Object.assign(doctor, {
-            medicalSpecialty: medicalSpecialties,
-        });
-        return this.doctorRepository.save(doctor);
+        return medicalSpecialties;
     }
 };
 DoctorService = __decorate([

@@ -8,7 +8,6 @@ import { DoctorRepository } from './doctor.repository';
 import { EntityManager } from 'typeorm';
 import { Specialty } from 'src/specialties/specialty.entity';
 import { UpdateInfoDoctorDto } from './dtos/update-doctor-info.dto';
-import { UpdateMedicalSpecialtyDto } from './dtos/update-medicalSpecialty.dto';
 
 @Injectable()
 export class DoctorService {
@@ -23,14 +22,10 @@ export class DoctorService {
   ): Promise<Doctor> {
     const { medicalSpecialty } = createDoctorDto;
 
-    const medicalSpecialties: Specialty[] = await manager.findByIds(
-      Specialty,
+    const medicalSpecialties = await this.validateSpecialties(
+      manager,
       medicalSpecialty,
     );
-
-    if (medicalSpecialties.length < medicalSpecialty.length) {
-      throw new ConflictException('Specialty does not exists');
-    }
 
     return this.doctorRepository.createDoctor(
       createDoctorDto,
@@ -47,19 +42,36 @@ export class DoctorService {
   async updateInfo(
     id: string,
     updateInfoDto: UpdateInfoDoctorDto,
+    manager: EntityManager,
   ): Promise<Doctor> {
-    const doctor = await this.doctorRepository.findOneOrFail({ id });
+    const { medicalSpecialty } = updateInfoDto;
+
+    const doctor = await this.doctorRepository.findOne({ id });
+
+    if (!doctor) {
+      throw new ConflictException('Doctor does not exists');
+    }
+    if (medicalSpecialty) {
+      const medicalSpecialties = await this.validateSpecialties(
+        manager,
+        medicalSpecialty,
+      );
+
+      return this.doctorRepository.save(
+        Object.assign(doctor, {
+          ...updateInfoDto,
+          medicalSpecialty: medicalSpecialties,
+        }),
+      );
+    }
 
     return this.doctorRepository.save(Object.assign(doctor, updateInfoDto));
   }
 
-  async updateMedicalSpecialty(
-    id: string,
-    updateMedicalSpecialtyDto: UpdateMedicalSpecialtyDto,
+  async validateSpecialties(
     manager: EntityManager,
-  ) {
-    const { medicalSpecialty } = updateMedicalSpecialtyDto;
-
+    medicalSpecialty,
+  ): Promise<Specialty[]> {
     const medicalSpecialties: Specialty[] = await manager.findByIds(
       Specialty,
       medicalSpecialty,
@@ -69,12 +81,6 @@ export class DoctorService {
       throw new ConflictException('Specialty does not exists');
     }
 
-    const doctor = await this.doctorRepository.findOneOrFail({ id });
-
-    Object.assign(doctor, {
-      medicalSpecialty: medicalSpecialties,
-    });
-
-    return this.doctorRepository.save(doctor);
+    return medicalSpecialties;
   }
 }

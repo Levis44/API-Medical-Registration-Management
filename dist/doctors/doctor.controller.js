@@ -18,7 +18,6 @@ const create_doctor_dto_1 = require("./dtos/create-doctor.dto");
 const doctor_service_1 = require("./doctor.service");
 const typeorm_1 = require("typeorm");
 const update_doctor_info_dto_1 = require("./dtos/update-doctor-info.dto");
-const update_medicalSpecialty_dto_1 = require("./dtos/update-medicalSpecialty.dto");
 let DoctorController = class DoctorController {
     constructor(doctorService) {
         this.doctorService = doctorService;
@@ -29,11 +28,8 @@ let DoctorController = class DoctorController {
     listDoctors() {
         return this.doctorService.listDoctors();
     }
-    updateInfo(id, updateInfoDto) {
-        return this.doctorService.updateInfo(id, updateInfoDto);
-    }
-    updateMedicalSpecialty(id, updateMedicalSpecialtyDto, manager) {
-        return this.doctorService.updateMedicalSpecialty(id, updateMedicalSpecialtyDto, manager);
+    updateInfo(id, updateInfoDto, manager) {
+        return this.doctorService.updateInfo(id, updateInfoDto, manager);
     }
 };
 __decorate([
@@ -54,23 +50,15 @@ __decorate([
 ], DoctorController.prototype, "listDoctors", null);
 __decorate([
     (0, common_1.Patch)('updateInfo/:id'),
-    __param(0, (0, common_1.Param)('id')),
-    __param(1, (0, common_1.Body)()),
-    __metadata("design:type", Function),
-    __metadata("design:paramtypes", [String, update_doctor_info_dto_1.UpdateInfoDoctorDto]),
-    __metadata("design:returntype", Promise)
-], DoctorController.prototype, "updateInfo", null);
-__decorate([
-    (0, common_1.Patch)('updateMedicalSpecialty/:id'),
     (0, typeorm_1.Transaction)(),
     __param(0, (0, common_1.Param)('id')),
     __param(1, (0, common_1.Body)()),
     __param(2, (0, typeorm_1.TransactionManager)()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [String, update_medicalSpecialty_dto_1.UpdateMedicalSpecialtyDto,
+    __metadata("design:paramtypes", [String, update_doctor_info_dto_1.UpdateInfoDoctorDto,
         typeorm_1.EntityManager]),
-    __metadata("design:returntype", void 0)
-], DoctorController.prototype, "updateMedicalSpecialty", null);
+    __metadata("design:returntype", Promise)
+], DoctorController.prototype, "updateInfo", null);
 DoctorController = __decorate([
     (0, common_1.Controller)('doctor'),
     __metadata("design:paramtypes", [doctor_service_1.DoctorService])

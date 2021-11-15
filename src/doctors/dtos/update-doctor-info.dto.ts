@@ -1,5 +1,4 @@
 import {
-  ArrayMinSize,
   IsArray,
   IsNotEmpty,
   IsNumber,
@@ -8,6 +7,7 @@ import {
   IsString,
   MaxLength,
 } from 'class-validator';
+import { Specialty } from 'src/specialties/specialty.entity';
 
 export class UpdateInfoDoctorDto {
   @IsOptional()
@@ -31,4 +31,8 @@ export class UpdateInfoDoctorDto {
   @IsOptional()
   @IsNumber()
   cep?: number;
+
+  @IsOptional()
+  @IsArray()
+  medicalSpecialty?: Specialty[];
 }

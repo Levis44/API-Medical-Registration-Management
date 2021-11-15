@@ -6,7 +6,6 @@ import { Doctor } from './doctor.entity';
 import { DoctorService } from './doctor.service';
 import { EntityManager, Transaction, TransactionManager } from 'typeorm';
 import { UpdateInfoDoctorDto } from './dtos/update-doctor-info.dto';
-import { UpdateMedicalSpecialtyDto } from './dtos/update-medicalSpecialty.dto';
 
 @Controller('doctor')
 export class DoctorController {
@@ -27,24 +26,12 @@ export class DoctorController {
   }
 
   @Patch('updateInfo/:id')
+  @Transaction()
   updateInfo(
     @Param('id') id: string,
     @Body() updateInfoDto: UpdateInfoDoctorDto,
-  ): Promise<Doctor> {
-    return this.doctorService.updateInfo(id, updateInfoDto);
-  }
-
-  @Patch('updateMedicalSpecialty/:id')
-  @Transaction()
-  updateMedicalSpecialty(
-    @Param('id') id: string,
-    @Body() updateMedicalSpecialtyDto: UpdateMedicalSpecialtyDto,
     @TransactionManager() manager: EntityManager,
-  ) {
-    return this.doctorService.updateMedicalSpecialty(
-      id,
-      updateMedicalSpecialtyDto,
-      manager,
-    );
+  ): Promise<Doctor> {
+    return this.doctorService.updateInfo(id, updateInfoDto, manager);
   }
 }
