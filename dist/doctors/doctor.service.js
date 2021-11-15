@@ -34,9 +34,21 @@ let DoctorService = class DoctorService {
             relations: ['medicalSpecialty'],
         });
     }
-    async updateInfo(id, updateInfo) {
+    async updateInfo(id, updateInfoDto) {
         const doctor = await this.doctorRepository.findOneOrFail({ id });
-        return this.doctorRepository.save(Object.assign(doctor, updateInfo));
+        return this.doctorRepository.save(Object.assign(doctor, updateInfoDto));
+    }
+    async updateMedicalSpecialty(id, updateMedicalSpecialtyDto, manager) {
+        const { medicalSpecialty } = updateMedicalSpecialtyDto;
+        const medicalSpecialties = await manager.findByIds(specialty_entity_1.Specialty, medicalSpecialty);
+        if (medicalSpecialties.length < medicalSpecialty.length) {
+            throw new common_1.ConflictException('Specialty does not exists');
+        }
+        const doctor = await this.doctorRepository.findOneOrFail({ id });
+        Object.assign(doctor, {
+            medicalSpecialty: medicalSpecialties,
+        });
+        return this.doctorRepository.save(doctor);
     }
 };
 DoctorService = __decorate([
