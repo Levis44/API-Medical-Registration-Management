@@ -7,6 +7,7 @@ import { Doctor } from './doctor.entity';
 import { DoctorRepository } from './doctor.repository';
 import { EntityManager } from 'typeorm';
 import { Specialty } from 'src/specialties/specialty.entity';
+import { UpdateInfoDoctorDto } from './dtos/update-doctor-info.dto';
 
 @Injectable()
 export class DoctorService {
@@ -40,5 +41,11 @@ export class DoctorService {
     return await this.doctorRepository.find({
       relations: ['medicalSpecialty'],
     });
+  }
+
+  async updateInfo(id: string, updateInfo: UpdateInfoDoctorDto) {
+    const doctor = await this.doctorRepository.findOneOrFail({ id });
+
+    return this.doctorRepository.save(Object.assign(doctor, updateInfo));
   }
 }

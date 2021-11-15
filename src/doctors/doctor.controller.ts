@@ -1,10 +1,11 @@
-import { Body, Controller, Get, Post } from '@nestjs/common';
+import { Body, Controller, Get, Param, Patch, Post } from '@nestjs/common';
 
 import { CreateDoctorDto } from './dtos/create-doctor.dto';
 
 import { Doctor } from './doctor.entity';
 import { DoctorService } from './doctor.service';
 import { EntityManager, Transaction, TransactionManager } from 'typeorm';
+import { UpdateInfoDoctorDto } from './dtos/update-doctor-info.dto';
 
 @Controller('doctor')
 export class DoctorController {
@@ -23,5 +24,10 @@ export class DoctorController {
   @Transaction()
   listDoctors(): Promise<Doctor[]> {
     return this.doctorService.listDoctors();
+  }
+
+  @Patch('updateInfo/:id')
+  updateInfo(@Param('id') id: string, @Body() updateInfo: UpdateInfoDoctorDto) {
+    return this.doctorService.updateInfo(id, updateInfo);
   }
 }

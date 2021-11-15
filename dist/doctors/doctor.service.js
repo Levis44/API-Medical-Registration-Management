@@ -34,6 +34,10 @@ let DoctorService = class DoctorService {
             relations: ['medicalSpecialty'],
         });
     }
+    async updateInfo(id, updateInfo) {
+        const doctor = await this.doctorRepository.findOneOrFail({ id });
+        return this.doctorRepository.save(Object.assign(doctor, updateInfo));
+    }
 };
 DoctorService = __decorate([
     (0, common_1.Injectable)(),
