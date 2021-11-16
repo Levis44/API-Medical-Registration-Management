@@ -119,4 +119,8 @@ export class DoctorService extends TypeOrmQueryService<Doctor> {
 
     await this.doctorRepository.softRemove(doctor);
   }
+
+  searchDoctor(search: string): Promise<Doctor[]> {
+    return this.doctorRepository.searchDoctor(search);
+  }
 }

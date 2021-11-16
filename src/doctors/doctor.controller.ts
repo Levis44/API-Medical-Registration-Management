@@ -6,6 +6,7 @@ import {
   Param,
   Patch,
   Post,
+  Query,
 } from '@nestjs/common';
 
 import { CreateDoctorDto } from './dtos/create-doctor.dto';
@@ -14,6 +15,7 @@ import { Doctor } from './doctor.entity';
 import { DoctorService } from './doctor.service';
 import { EntityManager, Transaction, TransactionManager } from 'typeorm';
 import { UpdateInfoDoctorDto } from './dtos/update-doctor-info.dto';
+import { FilterDoctorsDto } from './dtos/filter-doctors.dto';
 
 @Controller('doctor')
 export class DoctorController {
@@ -31,6 +33,12 @@ export class DoctorController {
   @Get('listAll')
   listDoctors() {
     return this.doctorService.listDoctors();
+  }
+
+  @Get('filter')
+  getTasks(@Query() filterDto: FilterDoctorsDto): Promise<Doctor[]> {
+    const { search } = filterDto;
+    return this.doctorService.searchDoctor(search);
   }
 
   @Patch('updateInfo/:id')

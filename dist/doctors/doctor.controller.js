@@ -18,6 +18,7 @@ const create_doctor_dto_1 = require("./dtos/create-doctor.dto");
 const doctor_service_1 = require("./doctor.service");
 const typeorm_1 = require("typeorm");
 const update_doctor_info_dto_1 = require("./dtos/update-doctor-info.dto");
+const filter_doctors_dto_1 = require("./dtos/filter-doctors.dto");
 let DoctorController = class DoctorController {
     constructor(doctorService) {
         this.doctorService = doctorService;
@@ -27,6 +28,10 @@ let DoctorController = class DoctorController {
     }
     listDoctors() {
         return this.doctorService.listDoctors();
+    }
+    getTasks(filterDto) {
+        const { search } = filterDto;
+        return this.doctorService.searchDoctor(search);
     }
     updateInfo(id, updateInfoDto, manager) {
         return this.doctorService.updateInfo(id, updateInfoDto, manager);
@@ -52,6 +57,13 @@ __decorate([
     __metadata("design:paramtypes", []),
     __metadata("design:returntype", void 0)
 ], DoctorController.prototype, "listDoctors", null);
+__decorate([
+    (0, common_1.Get)('filter'),
+    __param(0, (0, common_1.Query)()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [filter_doctors_dto_1.FilterDoctorsDto]),
+    __metadata("design:returntype", Promise)
+], DoctorController.prototype, "getTasks", null);
 __decorate([
     (0, common_1.Patch)('updateInfo/:id'),
     (0, typeorm_1.Transaction)(),

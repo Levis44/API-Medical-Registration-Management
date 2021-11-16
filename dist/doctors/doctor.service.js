@@ -71,6 +71,9 @@ let DoctorService = class DoctorService extends query_typeorm_1.TypeOrmQueryServ
         }
         await this.doctorRepository.softRemove(doctor);
     }
+    searchDoctor(search) {
+        return this.doctorRepository.searchDoctor(search);
+    }
 };
 DoctorService = __decorate([
     (0, common_1.Injectable)(),

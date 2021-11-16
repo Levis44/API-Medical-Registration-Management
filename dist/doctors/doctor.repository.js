@@ -28,6 +28,13 @@ let DoctorRepository = class DoctorRepository extends typeorm_1.Repository {
         });
         return await this.save(doctor);
     }
+    async searchDoctor(search) {
+        return this.createQueryBuilder('doctor')
+            .andWhere(`LOWER(doctor.name) LIKE LOWER(:search) OR
+       LOWER(doctor.cellphoneNumber) LIKE LOWER(:search) OR
+       LOWER(doctor.phoneNumber) LIKE LOWER(:search)`, { search: `%${search}%` })
+            .getMany();
+    }
 };
 DoctorRepository = __decorate([
     (0, typeorm_1.EntityRepository)(doctor_entity_1.Doctor)

@@ -13,4 +13,5 @@ export declare class DoctorService extends TypeOrmQueryService<Doctor> {
     updateInfo(id: string, updateInfoDto: UpdateInfoDoctorDto, manager: EntityManager): Promise<Doctor>;
     validateSpecialties(manager: EntityManager, medicalSpecialty: any): Promise<Specialty[]>;
     deleteDoctor(id: string): Promise<void>;
+    searchDoctor(search: string): Promise<Doctor[]>;
 }

@@ -31,4 +31,16 @@ export class DoctorRepository extends Repository<Doctor> {
 
     return await this.save(doctor);
   }
+
+  async searchDoctor(search: string): Promise<Doctor[]> {
+    return this.createQueryBuilder('doctor')
+      .andWhere(
+        `LOWER(doctor.name) LIKE LOWER(:search) OR
+       LOWER(doctor.cellphoneNumber) LIKE LOWER(:search) OR
+       LOWER(doctor.phoneNumber) LIKE LOWER(:search)`,
+
+        { search: `%${search}%` },
+      )
+      .getMany();
+  }
 }
