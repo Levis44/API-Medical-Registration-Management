@@ -7,7 +7,7 @@ export declare class DoctorController {
     private doctorService;
     constructor(doctorService: DoctorService);
     createSpecialty(createDoctorDto: CreateDoctorDto, manager: EntityManager): Promise<Doctor>;
-    listDoctors(): Promise<Doctor[]>;
+    listDoctors(): Promise<any[]>;
     updateInfo(id: string, updateInfoDto: UpdateInfoDoctorDto, manager: EntityManager): Promise<Doctor>;
-    deleteDoctor(id: string): Promise<Doctor[]>;
+    deleteDoctor(id: string): Promise<any[]>;
 }

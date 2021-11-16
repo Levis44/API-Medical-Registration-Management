@@ -18,6 +18,7 @@ const typeorm_1 = require("@nestjs/typeorm");
 const doctor_repository_1 = require("./doctor.repository");
 const specialty_entity_1 = require("../specialties/specialty.entity");
 const query_typeorm_1 = require("@nestjs-query/query-typeorm");
+const axios_1 = require("axios");
 let DoctorService = class DoctorService extends query_typeorm_1.TypeOrmQueryService {
     constructor(doctorRepository) {
         super(doctorRepository, { useSoftDelete: true });
@@ -29,9 +30,20 @@ let DoctorService = class DoctorService extends query_typeorm_1.TypeOrmQueryServ
         return this.doctorRepository.createDoctor(createDoctorDto, medicalSpecialties);
     }
     async listDoctors() {
-        return await this.doctorRepository.find({
+        const doctors = await this.doctorRepository.find({
             relations: ['medicalSpecialty'],
         });
+        const formattedDoctors = [];
+        for (const _doctor of doctors) {
+            const cepResponse = await (0, axios_1.default)({
+                method: 'post',
+                url: 'https://correios.contrateumdev.com.br/api/cep',
+                data: { cep: _doctor.cep.toString() },
+            });
+            _doctor.cep = cepResponse.data;
+            formattedDoctors.push(_doctor);
+        }
+        return formattedDoctors;
     }
     async updateInfo(id, updateInfoDto, manager) {
         const { medicalSpecialty } = updateInfoDto;

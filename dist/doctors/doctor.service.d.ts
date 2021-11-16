@@ -9,7 +9,7 @@ export declare class DoctorService extends TypeOrmQueryService<Doctor> {
     private doctorRepository;
     constructor(doctorRepository: DoctorRepository);
     createDoctor(manager: EntityManager, createDoctorDto: CreateDoctorDto): Promise<Doctor>;
-    listDoctors(): Promise<Doctor[]>;
+    listDoctors(): Promise<any[]>;
     updateInfo(id: string, updateInfoDto: UpdateInfoDoctorDto, manager: EntityManager): Promise<Doctor>;
     validateSpecialties(manager: EntityManager, medicalSpecialty: any): Promise<Specialty[]>;
     deleteDoctor(id: string): Promise<void>;

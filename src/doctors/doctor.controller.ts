@@ -29,7 +29,7 @@ export class DoctorController {
   }
 
   @Get('listAll')
-  listDoctors(): Promise<Doctor[]> {
+  listDoctors() {
     return this.doctorService.listDoctors();
   }
 

@@ -13,6 +13,7 @@ import { EntityManager } from 'typeorm';
 import { Specialty } from 'src/specialties/specialty.entity';
 import { UpdateInfoDoctorDto } from './dtos/update-doctor-info.dto';
 import { TypeOrmQueryService } from '@nestjs-query/query-typeorm';
+import axios from 'axios';
 
 @Injectable()
 export class DoctorService extends TypeOrmQueryService<Doctor> {
@@ -40,10 +41,26 @@ export class DoctorService extends TypeOrmQueryService<Doctor> {
     );
   }
 
-  async listDoctors(): Promise<Doctor[]> {
-    return await this.doctorRepository.find({
+  async listDoctors() {
+    const doctors = await this.doctorRepository.find({
       relations: ['medicalSpecialty'],
     });
+
+    const formattedDoctors = [];
+
+    for (const _doctor of doctors) {
+      const cepResponse = await axios({
+        method: 'post',
+        url: 'https://correios.contrateumdev.com.br/api/cep',
+        data: { cep: _doctor.cep.toString() },
+      });
+
+      _doctor.cep = cepResponse.data;
+
+      formattedDoctors.push(_doctor);
+    }
+
+    return formattedDoctors;
   }
 
   async updateInfo(
