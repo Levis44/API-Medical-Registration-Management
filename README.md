@@ -13,11 +13,7 @@
 Please check the documentation:
 https://www.notion.so/Medical-API-f6747e675c014a0f9b74e7a3e5cc4b39
 
-</br>
-
 ---
-
-</br>
 
 ## 🔧 Tools
 
@@ -27,11 +23,7 @@ https://www.notion.so/Medical-API-f6747e675c014a0f9b74e7a3e5cc4b39
 - Nodejs
 - ElephantSQL
 
-</br>
-
 ---
-
-</br>
 
 ## 👨‍💻 How to Setup
 
