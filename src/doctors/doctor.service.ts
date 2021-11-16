@@ -1,4 +1,8 @@
-import { ConflictException, Injectable } from '@nestjs/common';
+import {
+  ConflictException,
+  Injectable,
+  NotFoundException,
+} from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 
 import { CreateDoctorDto } from './dtos/create-doctor.dto';
@@ -8,13 +12,16 @@ import { DoctorRepository } from './doctor.repository';
 import { EntityManager } from 'typeorm';
 import { Specialty } from 'src/specialties/specialty.entity';
 import { UpdateInfoDoctorDto } from './dtos/update-doctor-info.dto';
+import { TypeOrmQueryService } from '@nestjs-query/query-typeorm';
 
 @Injectable()
-export class DoctorService {
+export class DoctorService extends TypeOrmQueryService<Doctor> {
   constructor(
     @InjectRepository(DoctorRepository)
     private doctorRepository: DoctorRepository,
-  ) {}
+  ) {
+    super(doctorRepository, { useSoftDelete: true });
+  }
 
   async createDoctor(
     manager: EntityManager,
@@ -82,5 +89,17 @@ export class DoctorService {
     }
 
     return medicalSpecialties;
+  }
+
+  async deleteDoctor(id: string) {
+    const doctor = await this.doctorRepository.findOne(id);
+
+    if (!doctor) {
+      throw new NotFoundException(
+        `Impossible to delete the Doctor with ID: ${id} because it was not found`,
+      );
+    }
+
+    await this.doctorRepository.softRemove(doctor);
   }
 }

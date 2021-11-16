@@ -49,6 +49,10 @@ __decorate([
     (0, typeorm_1.JoinTable)(),
     __metadata("design:type", Array)
 ], Doctor.prototype, "medicalSpecialty", void 0);
+__decorate([
+    (0, typeorm_1.DeleteDateColumn)(),
+    __metadata("design:type", Date)
+], Doctor.prototype, "deletedAt", void 0);
 Doctor = __decorate([
     (0, typeorm_1.Entity)()
 ], Doctor);

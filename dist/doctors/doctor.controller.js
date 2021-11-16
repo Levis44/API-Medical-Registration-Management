@@ -31,6 +31,10 @@ let DoctorController = class DoctorController {
     updateInfo(id, updateInfoDto, manager) {
         return this.doctorService.updateInfo(id, updateInfoDto, manager);
     }
+    async deleteDoctor(id) {
+        await this.doctorService.deleteDoctor(id);
+        return this.listDoctors();
+    }
 };
 __decorate([
     (0, common_1.Post)('create'),
@@ -59,6 +63,13 @@ __decorate([
         typeorm_1.EntityManager]),
     __metadata("design:returntype", Promise)
 ], DoctorController.prototype, "updateInfo", null);
+__decorate([
+    (0, common_1.Delete)('delete/:id'),
+    __param(0, (0, common_1.Param)('id')),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [String]),
+    __metadata("design:returntype", Promise)
+], DoctorController.prototype, "deleteDoctor", null);
 DoctorController = __decorate([
     (0, common_1.Controller)('doctor'),
     __metadata("design:paramtypes", [doctor_service_1.DoctorService])

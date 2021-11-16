@@ -7,4 +7,5 @@ export declare class Doctor {
     phoneNumber: string;
     cep: number;
     medicalSpecialty: Specialty[];
+    deletedAt?: Date;
 }

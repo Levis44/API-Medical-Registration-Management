@@ -1,4 +1,12 @@
-import { Body, Controller, Get, Param, Patch, Post } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Delete,
+  Get,
+  Param,
+  Patch,
+  Post,
+} from '@nestjs/common';
 
 import { CreateDoctorDto } from './dtos/create-doctor.dto';
 
@@ -33,5 +41,11 @@ export class DoctorController {
     @TransactionManager() manager: EntityManager,
   ): Promise<Doctor> {
     return this.doctorService.updateInfo(id, updateInfoDto, manager);
+  }
+
+  @Delete('delete/:id')
+  async deleteDoctor(@Param('id') id: string) {
+    await this.doctorService.deleteDoctor(id);
+    return this.listDoctors();
   }
 }

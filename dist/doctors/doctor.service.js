@@ -17,8 +17,10 @@ const common_1 = require("@nestjs/common");
 const typeorm_1 = require("@nestjs/typeorm");
 const doctor_repository_1 = require("./doctor.repository");
 const specialty_entity_1 = require("../specialties/specialty.entity");
-let DoctorService = class DoctorService {
+const query_typeorm_1 = require("@nestjs-query/query-typeorm");
+let DoctorService = class DoctorService extends query_typeorm_1.TypeOrmQueryService {
     constructor(doctorRepository) {
+        super(doctorRepository, { useSoftDelete: true });
         this.doctorRepository = doctorRepository;
     }
     async createDoctor(manager, createDoctorDto) {
@@ -49,6 +51,13 @@ let DoctorService = class DoctorService {
             throw new common_1.ConflictException('Specialty does not exists');
         }
         return medicalSpecialties;
+    }
+    async deleteDoctor(id) {
+        const doctor = await this.doctorRepository.findOne(id);
+        if (!doctor) {
+            throw new common_1.NotFoundException(`Impossible to delete the Doctor with ID: ${id} because it was not found`);
+        }
+        await this.doctorRepository.softRemove(doctor);
     }
 };
 DoctorService = __decorate([
